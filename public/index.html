@@ -8,11 +8,25 @@
   <body>
     <h1>Sesiones Data</h1>
     <button id="loadData">Load Sesiones Data</button>
+    <button id="loadP2PData">Load P2P Sesiones Data</button>
     <div id="dataDisplay"></div>
 
     <script>
       document.getElementById("loadData").addEventListener("click", () => {
         fetch("/api/sesiones")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("dataDisplay").innerHTML = JSON.stringify(
+              data,
+              null,
+              2,
+            );
+          })
+          .catch((error) => console.error("Error:", error));
+      });
+
+      document.getElementById("loadP2PData").addEventListener("click", () => {
+        fetch("/api/sesiones/p2p")
           .then((response) => response.json())
           .then((data) => {
             document.getElementById("dataDisplay").innerHTML = JSON.stringify(

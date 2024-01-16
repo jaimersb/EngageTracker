@@ -15,6 +15,16 @@ app.get("/api/sesiones", async (req, res) => {
   }
 });
 
+app.get('/api/sesiones/p2p', async (req, res) => {
+    try {
+        const data = await fetchSesiones();
+        const filteredData = data.filter(record => record.fields['Iniciativa Plain Text'] === 'P2P');
+        res.json(filteredData);
+    } catch (error) {
+        res.status(500).send('Error fetching P2P Sesiones');
+    }
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
