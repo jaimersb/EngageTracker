@@ -7,32 +7,10 @@
   <body>
     <div class="container">
       <h1>Welcome to SHIFT EngageTracker</h1>
-      <button onclick="fetchP2PCountByYear()">
-        Count P2P Sessions by Year
-      </button>
-      <div id="p2pCountByYear"></div>
+      <button onclick="window.location.href='p2p-sessions.html'">View P2P Sessions</button>
+
     </div>
 
-    <script>
-      async function fetchP2PCountByYear() {
-        try {
-          const response = await fetch("/api/fetchP2PCountByYear");
-          const data = await response.json();
-          displayP2PCountByYear(data);
-        } catch (error) {
-          console.error("Error fetching P2P count by year:", error);
-        }
-      }
-
-      function displayP2PCountByYear(data) {
-        const container = document.getElementById("p2pCountByYear");
-        container.innerHTML = "";
-        for (const [year, count] of Object.entries(data)) {
-          const div = document.createElement("div");
-          div.textContent = `Year ${year}: ${count} P2P session(s)`;
-          container.appendChild(div);
-        }
-      }
-    </script>
+    <script></script>
   </body>
 </html>
