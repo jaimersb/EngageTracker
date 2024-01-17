@@ -10,6 +10,8 @@
     <button id="loadData">Load Sesiones Data</button>
     <button id="loadP2PData">Load P2P Sesiones Data</button>
     <div id="dataDisplay"></div>
+    <button id="countP2P">Count P2P Records</button>
+    <div id="p2pCountResult"></div>
 
     <script>
       document.getElementById("loadData").addEventListener("click", () => {
@@ -34,6 +36,16 @@
               null,
               2,
             );
+          })
+          .catch((error) => console.error("Error:", error));
+      });
+
+      document.getElementById("countP2P").addEventListener("click", () => {
+        fetch("/api/sesiones/countP2P")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("p2pCountResult").innerText =
+              `P2P Count: ${data.count}`;
           })
           .catch((error) => console.error("Error:", error));
       });
