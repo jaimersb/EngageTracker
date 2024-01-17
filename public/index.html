@@ -1,54 +1,38 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sesiones Data</title>
+    <!-- Meta tags, title, and styles -->
+    <title>SHIFT EngageTracker</title>
   </head>
   <body>
-    <h1>Sesiones Data</h1>
-    <button id="loadData">Load Sesiones Data</button>
-    <button id="loadP2PData">Load P2P Sesiones Data</button>
-    <div id="dataDisplay"></div>
-    <button id="countP2P">Count P2P Records</button>
-    <div id="p2pCountResult"></div>
+    <div class="container">
+      <h1>Welcome to SHIFT EngageTracker</h1>
+      <button onclick="fetchP2PCountByYear()">
+        Count P2P Sessions by Year
+      </button>
+      <div id="p2pCountByYear"></div>
+    </div>
 
     <script>
-      document.getElementById("loadData").addEventListener("click", () => {
-        fetch("/api/sesiones")
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById("dataDisplay").innerHTML = JSON.stringify(
-              data,
-              null,
-              2,
-            );
-          })
-          .catch((error) => console.error("Error:", error));
-      });
+      async function fetchP2PCountByYear() {
+        try {
+          const response = await fetch("/api/fetchP2PCountByYear");
+          const data = await response.json();
+          displayP2PCountByYear(data);
+        } catch (error) {
+          console.error("Error fetching P2P count by year:", error);
+        }
+      }
 
-      document.getElementById("loadP2PData").addEventListener("click", () => {
-        fetch("/api/sesiones/p2p")
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById("dataDisplay").innerHTML = JSON.stringify(
-              data,
-              null,
-              2,
-            );
-          })
-          .catch((error) => console.error("Error:", error));
-      });
-
-      document.getElementById("countP2P").addEventListener("click", () => {
-        fetch("/api/sesiones/countP2P")
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById("p2pCountResult").innerText =
-              `P2P Count: ${data.count}`;
-          })
-          .catch((error) => console.error("Error:", error));
-      });
+      function displayP2PCountByYear(data) {
+        const container = document.getElementById("p2pCountByYear");
+        container.innerHTML = "";
+        for (const [year, count] of Object.entries(data)) {
+          const div = document.createElement("div");
+          div.textContent = `Year ${year}: ${count} P2P session(s)`;
+          container.appendChild(div);
+        }
+      }
     </script>
   </body>
 </html>
