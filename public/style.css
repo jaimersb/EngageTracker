@@ -22,25 +22,28 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 90%; /* Adjusted for report layout */
     margin: auto;
+    background-color: var(--color-blanco);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
 /* Header Styles */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Axia', sans-serif; /* SHIFT's font for headings */
-    color: var(--color-negro); /* SHIFT's black color for headings */
+    color: var(--color-fucsia); /* Consistent color for all headings */
 }
 
+/* Additional styles for specific headings can be defined here */
 h1 {
     text-align: center;
     margin: 20px 0;
 }
 
-/* Additional styles for h2 - h6 can be defined here */
-
-/* Buttons */
+/* Button Styles */
 button {
     display: inline-block;
     background: var(--color-amarillo); /* SHIFT's yellow for primary button */
@@ -57,7 +60,7 @@ button:hover {
 }
 
 /* Divs and Sections */
-#countResult {
+#countResult, #learningParticipation, #networkingOpportunities, #newConnections, #brandExposure, #membershipRecommendations {
     margin-top: 20px;
     padding: 10px;
     background-color: var(--color-e7e7e7); /* A lighter grey for background */
@@ -72,3 +75,11 @@ button:hover {
 .back-button:hover {
     background-color: var(--color-gris); /* SHIFT's grey for hover state */
 }
+
+/* Paragraphs and Lists */
+p, li {
+    color: var(--color-negro);
+    line-height: 1.5;
+}
+
+/* Additional styles for tables, lists, graphs, etc., can be added here */
