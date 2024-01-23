@@ -1,8 +1,21 @@
+/* Root Color Variables */
+:root {
+    --color-amarillo: #FAEC21;
+    --color-negro: #000000;
+    --color-blanco: #FFFFFF;
+    --color-gris: #CCCCCC;
+    --color-fucsia: #E62377;
+    --color-e7e7e7: #e7e7e7;
+}
+
+/* Import font from Google Fonts or another source if needed */
+@import url('https://fonts.googleapis.com/css?family=Proxima+Nova:400,700,400italic,700italic');
+
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Proxima Nova', sans-serif; /* SHIFT's font */
+    background-color: var(--color-blanco); /* SHIFT's white color */
+    color: var(--color-negro); /* SHIFT's black color for text */
     line-height: 1.6;
     padding: 0;
     margin: 0;
@@ -14,18 +27,24 @@ body {
     overflow: hidden;
 }
 
-/* Header */
+/* Header Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Axia', sans-serif; /* SHIFT's font for headings */
+    color: var(--color-negro); /* SHIFT's black color for headings */
+}
+
 h1 {
-    color: #333;
     text-align: center;
     margin: 20px 0;
 }
 
+/* Additional styles for h2 - h6 can be defined here */
+
 /* Buttons */
 button {
     display: inline-block;
-    background: #007bff;
-    color: #fff;
+    background: var(--color-amarillo); /* SHIFT's yellow for primary button */
+    color: var(--color-negro); /* SHIFT's black for button text */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -34,22 +53,22 @@ button {
 }
 
 button:hover {
-    background: #0056b3;
+    background: var(--color-gris); /* SHIFT's grey for hover state */
 }
 
 /* Divs and Sections */
 #countResult {
     margin-top: 20px;
     padding: 10px;
-    background-color: #e7e7e7;
+    background-color: var(--color-e7e7e7); /* A lighter grey for background */
     border-radius: 5px;
 }
 
 /* Back Button */
 .back-button {
-    background-color: #28a745;
+    background-color: var(--color-fucsia); /* SHIFT's fucsia for back button */
 }
 
 .back-button:hover {
-    background-color: #218838;
+    background-color: var(--color-gris); /* SHIFT's grey for hover state */
 }
