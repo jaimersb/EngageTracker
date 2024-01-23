@@ -19,10 +19,7 @@ const fetchRepresentantes = async () => {
       filterByFormula: 'AND({Empresa} = "RIMAC", FIND("Representante Socio", {Role in SHIFT}), {Status} = "Active")',
       fields: ["Name Completo"]
     }).all();
-    records.forEach(record => {
-      console.log(record.get('Name Completo'));
-    });
-    return records;
+    return records.map(record => record.get('Name Completo'));
   } catch (error) {
     console.error('Error fetching representantes:', error);
     throw error;
