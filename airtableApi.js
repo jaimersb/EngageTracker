@@ -1,38 +1,28 @@
 const axios = require("axios");
 
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const AIRTABLE_BASE = "appEtD7RDU8cFew8v";
+const Airtable = require("airtable");
 
-// Function to fetch Sesiones data and handle pagination
-async function fetchSesiones() {
-  let allRecords = [];
-  let offset;
+const apiKey = process.env.AIRTABLE_API_KEY;
 
-  do {
-    const response = await axios.get(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE}/Sesiones?${
-        offset ? `offset=${offset}` : ""
-      }`,
-      { headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` } },
-    );
-    allRecords = allRecords.concat(response.data.records);
-    offset = response.data.offset;
-  } while (offset);
+// Create instances for each base
+const basePersonasEmpresas = new Airtable({ apiKey: apiKey }).base(
+  "appDS68XM6HO64mTm",
+);
+const baseDashboard = new Airtable({ apiKey: apiKey }).base(
+  "appEtD7RDU8cFew8v",
+);
 
-  return allRecords;
-}
+// Function to fetch Representantes
+const fetchRepresentantes = async () => {
+  try {
+    // Assuming you want to fetch data from "Base de Datos"
+    const records = await basePersonasEmpresas("Personas").select().all();
+    console.log("Fetched Records from Base de Datos:", records); // Log the fetched records
+    return records; // Return the records
+  } catch (error) {
+    console.error("Error fetching records:", error);
+    throw error;
+  }
+};
 
-// Function to count P2P sessions by year
-async function fetchP2PCountByYear() {
-  const sesiones = await fetchSesiones();
-
-  return sesiones
-    .filter((record) => record.fields["Iniciativa Plain Text"] === "P2P")
-    .reduce((acc, record) => {
-      const year = record.fields["Año"];
-      acc[year] = (acc[year] || 0) + 1;
-      return acc;
-    }, {});
-}
-
-module.exports = { fetchSesiones, fetchP2PCountByYear };
+module.exports = { fetchRepresentantes };
