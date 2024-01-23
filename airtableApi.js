@@ -15,14 +15,17 @@ const baseDashboard = new Airtable({ apiKey: apiKey }).base(
 // Function to fetch Representantes
 const fetchRepresentantes = async () => {
   try {
-    // Assuming you want to fetch data from "Base de Datos"
-    const records = await basePersonasEmpresas("Personas").select().all();
-    console.log("Fetched Records from Base de Datos:", records); // Log the fetched records
-    return records; // Return the records
+    const records = await basePersonasEmpresas('Personas').select({
+      filterByFormula: 'AND({Empresa} = "RIMAC", FIND("Representante Socio", {Role in SHIFT}), {Status} = "Active")',
+      fields: ["Name Completo"]
+    }).all();
+    records.forEach(record => {
+      console.log(record.get('Name Completo'));
+    });
+    return records;
   } catch (error) {
-    console.error("Error fetching records:", error);
+    console.error('Error fetching representantes:', error);
     throw error;
   }
 };
-
 module.exports = { fetchRepresentantes };
